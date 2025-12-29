@@ -2,7 +2,6 @@ package com.example.collaborative_code_editor.controller;
 
 import com.example.collaborative_code_editor.DTO.CreateProjectRequest;
 import com.example.collaborative_code_editor.model.Project;
-import com.example.collaborative_code_editor.repository.ProjectRepository;
 import com.example.collaborative_code_editor.service.ProjectService;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
@@ -13,9 +12,7 @@ import java.util.List;
 @RequestMapping("/projects")
 public class ProjectController {
     private final ProjectService service;
-    private final ProjectRepository repo;
-    public ProjectController(ProjectRepository repo, ProjectService service) {
-        this.repo = repo;
+    public ProjectController(ProjectService service) {
         this.service = service;
     }
 
