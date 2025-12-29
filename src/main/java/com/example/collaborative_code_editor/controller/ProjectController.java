@@ -1,5 +1,6 @@
 package com.example.collaborative_code_editor.controller;
 
+import com.example.collaborative_code_editor.DTO.CreateProjectRequest;
 import com.example.collaborative_code_editor.model.Project;
 import com.example.collaborative_code_editor.repository.ProjectRepository;
 import com.example.collaborative_code_editor.service.ProjectService;
@@ -11,27 +12,29 @@ import java.util.List;
 @RestController
 @RequestMapping("/projects")
 public class ProjectController {
+    private final ProjectService service;
     private final ProjectRepository repo;
-    public ProjectController(ProjectRepository repo) {
+    public ProjectController(ProjectRepository repo, ProjectService service) {
         this.repo = repo;
+        this.service = service;
     }
 
     @PostMapping
-    public void createProject(@RequestBody Project project) {
+    public void createProject(@RequestBody CreateProjectRequest request) {
         Long userId = (Long) SecurityContextHolder
                 .getContext()
                 .getAuthentication()
                 .getPrincipal();
-        project.setOwnerId(userId);
-        repo.save(project);
+        service.createProject(request.getName(), userId);
     }
+
     @GetMapping
     public List<Project> getMyProject() {
         Long userId = (Long) SecurityContextHolder
                 .getContext()
                 .getAuthentication()
                 .getPrincipal();
-        return repo.findByOwnerId(userId);
+        return service.getMyProjects(userId);
     }
 
     @DeleteMapping("/{projectId}")
@@ -41,13 +44,7 @@ public class ProjectController {
                 .getAuthentication()
                 .getPrincipal();
 
-        Project prject = repo.findById(projectId)
-                .orElseThrow(() -> new RuntimeException("Project not found"));
-
-        if (!prject.getOwnerId().equals(userId)) {
-            throw new RuntimeException("Forbidden");
-        }
-        repo.delete(prject);
+        service.DeleteProject(projectId, userId);
     }
 
 
