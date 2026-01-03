@@ -29,7 +29,7 @@ public class ProjectService {
     public void DeleteProject(Long projectId, Long userId) {
         Project project = repo.findById(projectId).orElseThrow(() -> new ResourceNotFoundException("Project not found"));
         if (!project.getOwnerId().equals(userId)) {
-            throw new ForbiddenException("Forbidden");
+            throw new ForbiddenException("You are not allowed to delete this project");
         }
         repo.delete(project);
     }

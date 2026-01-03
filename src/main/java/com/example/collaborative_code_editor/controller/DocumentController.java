@@ -3,10 +3,10 @@ package com.example.collaborative_code_editor.controller;
 import com.example.collaborative_code_editor.DTO.CreateDocumentRequest;
 import com.example.collaborative_code_editor.DTO.UpdateDocumentRequest;
 import com.example.collaborative_code_editor.model.Document;
-import com.example.collaborative_code_editor.model.Project;
-import com.example.collaborative_code_editor.repository.DocumentRepository;
+import com.example.collaborative_code_editor.model.DocumentVersion;
 import com.example.collaborative_code_editor.service.DocumentService;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.parameters.P;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -14,7 +14,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/projects/{projectId}/documents")
 public class DocumentController {
-    private DocumentService service;
+    private final DocumentService service;
     public DocumentController(DocumentService service) {
         this.service = service;
     }
@@ -46,7 +46,7 @@ public class DocumentController {
         return service.updateDocument(projectId, documentId, userId, request.getContent());
     }
 
-    @DeleteMapping("{documentId}")
+    @DeleteMapping("/{documentId}")
     public void deleteDocument(@PathVariable Long projectId, @PathVariable Long documentId) {
         Long userId = (Long) SecurityContextHolder
                 .getContext()
@@ -56,5 +56,31 @@ public class DocumentController {
         service.deleteDocument(projectId, documentId, userId);
     }
 
+    @GetMapping ("/{documentId}/versions")
+    public List<DocumentVersion> getDocumentVersions(@PathVariable Long projectId
+    , @PathVariable Long documentId) {
+        Long userId = (Long) SecurityContextHolder
+                .getContext()
+                .getAuthentication()
+                .getPrincipal();
+        return service.getDocumentVersions(projectId, documentId, userId);
+    }
+
+    @PostMapping("/{documentId}/versions/{versionId}/restore")
+    public Document restoreVersion(
+            @PathVariable Long projectId,
+            @PathVariable Long documentId,
+            @PathVariable Long versionId
+    ) {
+        System.out.println("RESTORE VERSION HIT");
+
+        Long userId = (Long) SecurityContextHolder
+                .getContext()
+                .getAuthentication()
+                .getPrincipal();
+
+        return service.restoreVersion(projectId, documentId, versionId, userId);
+
+    }
 
 }
