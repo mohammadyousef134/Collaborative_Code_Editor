@@ -4,7 +4,6 @@ import com.example.collaborative_code_editor.exception.ForbiddenException;
 import com.example.collaborative_code_editor.exception.ResourceNotFoundException;
 import com.example.collaborative_code_editor.model.Project;
 import com.example.collaborative_code_editor.repository.ProjectRepository;
-import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -29,6 +28,7 @@ public class ProjectService {
     public void DeleteProject(Long projectId, Long userId) {
         Project project = repo.findById(projectId).orElseThrow(() -> new ResourceNotFoundException("Project not found"));
         if (!project.getOwnerId().equals(userId)) {
+
             throw new ForbiddenException("You are not allowed to delete this project");
         }
         repo.delete(project);

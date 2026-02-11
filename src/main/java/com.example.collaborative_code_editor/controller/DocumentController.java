@@ -6,7 +6,6 @@ import com.example.collaborative_code_editor.model.Document;
 import com.example.collaborative_code_editor.model.DocumentVersion;
 import com.example.collaborative_code_editor.service.DocumentService;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.parameters.P;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -36,7 +35,6 @@ public class DocumentController {
                 .getPrincipal();
         return service.createDocument(projectId, userId, request.getName());
     }
-
     @PutMapping("/{documentId}")
     public Document UpdateDocument(@PathVariable Long projectId, @PathVariable Long documentId, @RequestBody UpdateDocumentRequest request) {
         Long userId = (Long) SecurityContextHolder
@@ -52,6 +50,7 @@ public class DocumentController {
                 .getContext()
                 .getAuthentication()
                 .getPrincipal();
+
 
         service.deleteDocument(projectId, documentId, userId);
     }
@@ -80,7 +79,6 @@ public class DocumentController {
                 .getPrincipal();
 
         return service.restoreVersion(projectId, documentId, versionId, userId);
-
     }
 
 }
