@@ -1,13 +1,10 @@
 package com.example.collaborative_code_editor.DTO;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Setter
+@Getter
 public class CreateProjectRequest {
     private String name;
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getName() {
-        return name;
-    }
 }

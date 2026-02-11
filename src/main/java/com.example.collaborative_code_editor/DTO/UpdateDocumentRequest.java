@@ -1,13 +1,11 @@
 package com.example.collaborative_code_editor.DTO;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Setter
+@Getter
 public class UpdateDocumentRequest {
     private String content;
 
-    public void setContent(String content) {
-        this.content = content;
-    }
-
-    public String getContent() {
-        return content;
-    }
 }
