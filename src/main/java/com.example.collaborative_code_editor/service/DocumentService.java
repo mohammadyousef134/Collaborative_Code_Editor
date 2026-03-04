@@ -5,9 +5,12 @@ import com.example.collaborative_code_editor.exception.ResourceNotFoundException
 import com.example.collaborative_code_editor.model.Document;
 import com.example.collaborative_code_editor.model.DocumentVersion;
 import com.example.collaborative_code_editor.model.Project;
+import com.example.collaborative_code_editor.model.User;
 import com.example.collaborative_code_editor.repository.DocumentRepository;
 import com.example.collaborative_code_editor.repository.DocumentVersionRepository;
 import com.example.collaborative_code_editor.repository.ProjectRepository;
+import com.example.collaborative_code_editor.repository.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -18,6 +21,10 @@ public class DocumentService {
     private final DocumentVersionRepository VerRepo;
     private final DocumentRepository DocRepo;
     private final ProjectRepository ProRepo;
+
+    @Autowired
+    private UserRepository userRepo;
+
     public DocumentService(ProjectRepository ProRepo,
                            DocumentRepository DocRepo,
                            DocumentVersionRepository VerRepo) {
@@ -28,7 +35,7 @@ public class DocumentService {
 
     public List<Document> getDocuments(Long projectId, Long userId) {
         Project project = ProRepo.findById(projectId).orElseThrow(() -> new ResourceNotFoundException("Project not found"));
-        if (!project.getOwnerId().equals(userId)) {
+        if (!project.getOwner().getId().equals(userId)) {
             throw new ForbiddenException("You are not allowed to view the documents of this project");
         }
         return DocRepo.findByProjectId(projectId);
@@ -36,7 +43,7 @@ public class DocumentService {
 
     public Document createDocument(Long projectId, Long userId, String name) {
         Project project = ProRepo.findById(projectId).orElseThrow(() -> new ResourceNotFoundException("Project not found"));
-        if (!project.getOwnerId().equals(userId)) {
+        if (!project.getOwner().getId().equals(userId)) {
             throw new ForbiddenException("You are not allowed to add document to this project");
         }
 
@@ -44,7 +51,9 @@ public class DocumentService {
         doc.setContent("");
         doc.setName(name);
         doc.setProject(project);
+        doc.setCreatedAt(LocalDateTime.now());
         return DocRepo.save(doc);
+
     }
 
     public Document updateDocument(Long projectId,
@@ -52,7 +61,7 @@ public class DocumentService {
                                    Long userId,
                                    String content) {
         Project project = ProRepo.findById(projectId).orElseThrow(() -> new ResourceNotFoundException("Project not found"));
-        if (!project.getOwnerId().equals(userId)) {
+        if (!project.getOwner().getId().equals(userId)) {
             throw new ForbiddenException("You are not allowed to update this document");
         }
         Document document = DocRepo.findById(documentId).orElseThrow(() -> new ResourceNotFoundException("Document not found"));
@@ -60,10 +69,13 @@ public class DocumentService {
             System.out.println("Doc id " + documentId + " document.getId " + document.getId());
             throw new ForbiddenException("Document does not belong to this project");
         }
+        User user = userRepo.findById(userId).orElseThrow(
+                () -> new RuntimeException(new ResourceNotFoundException(""))
+        );
         DocumentVersion version = new DocumentVersion();
         version.setContent(document.getContent());
         version.setDocument(document);
-        version.setCreatedBy(userId);
+        version.setCreatedBy(user);
         version.setCreatedAt(LocalDateTime.now());
 
         VerRepo.save(version);
@@ -80,7 +92,7 @@ public class DocumentService {
             throw new ForbiddenException("Document does not belong to this project");
         }
 
-        if (!project.getOwnerId().equals(userId)) {
+        if (!project.getOwner().getId().equals(userId)) {
             throw new ForbiddenException("You are not allowed to delete this document");
         }
 
@@ -93,7 +105,7 @@ public class DocumentService {
                                                      Long userId) {
         Project project = ProRepo.findById(projectId).orElseThrow(() -> new ResourceNotFoundException("Project not found"));
         Document document = DocRepo.findById(documentId).orElseThrow(() -> new ResourceNotFoundException("Document not found"));
-        if (!project.getOwnerId().equals(userId)) {
+        if (!project.getOwner().getId().equals(userId)) {
             throw new ForbiddenException("You are not allowed to see the versions of this document");
         }
         if (!document.getProject().getId().equals(projectId)) {
@@ -110,7 +122,7 @@ public class DocumentService {
                                    Long userId) {
         System.out.println("service");
         Project project = ProRepo.findById(projectId).orElseThrow(() -> new ResourceNotFoundException("Project not found"));
-        if (!project.getOwnerId().equals(userId)) {
+        if (!project.getOwner().getId().equals(userId)) {
             throw new ForbiddenException("You are not allowed to restore this document");
         }
         Document document = DocRepo.findById(documentId).orElseThrow(() -> new ResourceNotFoundException("Document not found"));
@@ -122,11 +134,13 @@ public class DocumentService {
         if (!version.getDocument().getId().equals(documentId)) {
             throw new ForbiddenException("Version does not belong to this document");
         }
-
+        User user = userRepo.findById(userId).orElseThrow(
+                () -> new RuntimeException(new ResourceNotFoundException(""))
+        );
         DocumentVersion newVersion = new DocumentVersion();
         newVersion.setCreatedAt(LocalDateTime.now());
         newVersion.setContent(document.getContent());
-        newVersion.setCreatedBy(userId);
+        newVersion.setCreatedBy(user);
         newVersion.setDocument(document);
 
         VerRepo.save(newVersion);
@@ -135,7 +149,6 @@ public class DocumentService {
         return DocRepo.save(document);
 
     }
-
 
 
 }

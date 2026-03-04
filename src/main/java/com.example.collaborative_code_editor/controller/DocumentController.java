@@ -14,6 +14,7 @@ import java.util.List;
 @RequestMapping("/projects/{projectId}/documents")
 public class DocumentController {
     private final DocumentService service;
+
     public DocumentController(DocumentService service) {
         this.service = service;
     }
@@ -35,6 +36,7 @@ public class DocumentController {
                 .getPrincipal();
         return service.createDocument(projectId, userId, request.getName());
     }
+
     @PutMapping("/{documentId}")
     public Document UpdateDocument(@PathVariable Long projectId, @PathVariable Long documentId, @RequestBody UpdateDocumentRequest request) {
         Long userId = (Long) SecurityContextHolder
@@ -51,13 +53,12 @@ public class DocumentController {
                 .getAuthentication()
                 .getPrincipal();
 
-
         service.deleteDocument(projectId, documentId, userId);
     }
 
-    @GetMapping ("/{documentId}/versions")
+    @GetMapping("/{documentId}/versions")
     public List<DocumentVersion> getDocumentVersions(@PathVariable Long projectId
-    , @PathVariable Long documentId) {
+            , @PathVariable Long documentId) {
         Long userId = (Long) SecurityContextHolder
                 .getContext()
                 .getAuthentication()

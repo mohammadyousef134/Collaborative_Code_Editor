@@ -16,7 +16,8 @@ public class Project {
     @Column(nullable = false)
     private String name;
 
-    @Column(nullable = false)
-    private Long ownerId;
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "user_id", nullable = false)
+    private User owner;
 }
 

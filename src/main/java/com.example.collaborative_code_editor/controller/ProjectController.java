@@ -12,6 +12,7 @@ import java.util.List;
 @RequestMapping("/projects")
 public class ProjectController {
     private final ProjectService service;
+
     public ProjectController(ProjectService service) {
         this.service = service;
     }
@@ -26,7 +27,7 @@ public class ProjectController {
     }
 
     @GetMapping
-    public List<Project> getMyProject() {
+    public List<Project> getMyProjects() {
         Long userId = (Long) SecurityContextHolder
                 .getContext()
                 .getAuthentication()

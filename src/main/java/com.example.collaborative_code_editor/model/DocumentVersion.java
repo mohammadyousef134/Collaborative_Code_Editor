@@ -15,14 +15,18 @@ public class DocumentVersion {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    private int versionNumber;
+
     @Column(columnDefinition = "TEXT")
     private String content;
 
-    private Long createdBy;
-    private LocalDateTime createdAt;
+    @ManyToOne(optional = false)
+    private User createdBy;
 
-    @ManyToOne
-    @JoinColumn(name = "document_id")
+    private LocalDateTime createdAt;
+    
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "document_id", nullable = false)
     private Document document;
 
 }
