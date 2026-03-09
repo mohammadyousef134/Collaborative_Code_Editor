@@ -60,27 +60,37 @@ public class DocumentService {
                                    Long documentId,
                                    Long userId,
                                    String content) {
-        Project project = ProRepo.findById(projectId).orElseThrow(() -> new ResourceNotFoundException("Project not found"));
+
+        Project project = ProRepo.findById(projectId)
+                .orElseThrow(() -> new ResourceNotFoundException("Project not found"));
+
         if (!project.getOwner().getId().equals(userId)) {
             throw new ForbiddenException("You are not allowed to update this document");
         }
-        Document document = DocRepo.findById(documentId).orElseThrow(() -> new ResourceNotFoundException("Document not found"));
+
+        Document document = DocRepo.findById(documentId)
+                .orElseThrow(() -> new ResourceNotFoundException("Document not found"));
+
         if (!document.getProject().getId().equals(projectId)) {
-            System.out.println("Doc id " + documentId + " document.getId " + document.getId());
             throw new ForbiddenException("Document does not belong to this project");
         }
-        User user = userRepo.findById(userId).orElseThrow(
-                () -> new RuntimeException(new ResourceNotFoundException(""))
-        );
-        DocumentVersion version = new DocumentVersion();
-        version.setContent(document.getContent());
-        version.setDocument(document);
-        version.setCreatedBy(user);
-        version.setCreatedAt(LocalDateTime.now());
 
-        VerRepo.save(version);
+        if (!document.getContent().equals(content)) {
 
-        document.setContent(content);
+            User user = userRepo.findById(userId)
+                    .orElseThrow(() -> new ResourceNotFoundException("User not found"));
+
+            DocumentVersion version = new DocumentVersion();
+            version.setContent(document.getContent());
+            version.setDocument(document);
+            version.setCreatedBy(user);
+            version.setCreatedAt(LocalDateTime.now());
+
+            VerRepo.save(version);
+
+            document.setContent(content);
+        }
+
         return DocRepo.save(document);
     }
 
@@ -134,9 +144,8 @@ public class DocumentService {
         if (!version.getDocument().getId().equals(documentId)) {
             throw new ForbiddenException("Version does not belong to this document");
         }
-        User user = userRepo.findById(userId).orElseThrow(
-                () -> new RuntimeException(new ResourceNotFoundException(""))
-        );
+        User user = userRepo.findById(userId)
+                .orElseThrow(() -> new ResourceNotFoundException("User not found"));
         DocumentVersion newVersion = new DocumentVersion();
         newVersion.setCreatedAt(LocalDateTime.now());
         newVersion.setContent(document.getContent());
@@ -150,5 +159,21 @@ public class DocumentService {
 
     }
 
+    public Document getDocument(Long projectId, Long documentId, Long userId) {
+        Project project = ProRepo.findById(projectId)
+                .orElseThrow(() -> new ResourceNotFoundException("Project not found"));
 
+        if (!project.getOwner().getId().equals(userId)) {
+            throw new ForbiddenException("You are not allowed to access this project");
+        }
+
+        Document document = DocRepo.findById(documentId)
+                .orElseThrow(() -> new ResourceNotFoundException("Document not found"));
+
+        if (!document.getProject().getId().equals(projectId)) {
+            throw new ForbiddenException("Document does not belong to this project");
+        }
+
+        return document;
+    }
 }
