@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
 import api from "../api/api";
+import { useNavigate } from "react-router-dom";
 
 function Projects() {
 
   const [projects, setProjects] = useState([]);
   const [newProjectName, setNewProjectName] = useState("");
+  const navigate = useNavigate();
 
   useEffect(() => {
     loadProjects();
@@ -16,19 +18,21 @@ function Projects() {
   };
 
   const createProject = async () => {
-
+    if (!newProjectName) return;
     await api.post("/projects", {
       name: newProjectName
     });
 
     setNewProjectName("");
     loadProjects();
+
   };
 
   const deleteProject = async (id) => {
 
     await api.delete(`/projects/${id}`);
     loadProjects();
+
   };
 
   return (
@@ -48,14 +52,17 @@ function Projects() {
 
       <hr />
 
-      {projects.map((project) => (
+      {projects.map(project => (
         <div key={project.id}>
 
-          {project.name}
-
-          <button
-            onClick={() => deleteProject(project.id)}
+          <span
+            onClick={() => navigate(`/projects/${project.id}/documents`)}
+            style={{ cursor: "pointer", marginRight: "10px" }}
           >
+            {project.name}
+          </span>
+
+          <button onClick={() => deleteProject(project.id)}>
             Delete
           </button>
 

@@ -23,6 +23,7 @@ public class ProjectController {
                 .getContext()
                 .getAuthentication()
                 .getPrincipal();
+        System.out.println(userId);
         service.createProject(request.getName(), userId);
     }
 

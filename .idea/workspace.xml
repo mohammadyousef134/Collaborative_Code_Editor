@@ -4,44 +4,18 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b4606a95-179c-499a-883d-a0809ffcacb2" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitattributes" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.mvn/wrapper/maven-wrapper.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Dockerfile" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mvnw" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mvnw.cmd" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com.example.collaborative_code_editor/CollaborativeCodeEditorApplication.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com.example.collaborative_code_editor/DTO/CreateDocumentRequest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com.example.collaborative_code_editor/DTO/CreateProjectRequest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com.example.collaborative_code_editor/DTO/RegisterRequest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com.example.collaborative_code_editor/DTO/UpdateDocumentRequest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com.example.collaborative_code_editor/DTO/loginRequest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com.example.collaborative_code_editor/config/SecurityConfig.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com.example.collaborative_code_editor/controller/AuthController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com.example.collaborative_code_editor/controller/DocumentController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com.example.collaborative_code_editor/controller/ProjectController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com.example.collaborative_code_editor/enums/Role.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com.example.collaborative_code_editor/exception/ForbiddenException.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com.example.collaborative_code_editor/exception/GlobalExceptionHandler.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com.example.collaborative_code_editor/exception/ResourceNotFoundException.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com.example.collaborative_code_editor/model/Document.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com.example.collaborative_code_editor/model/DocumentVersion.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com.example.collaborative_code_editor/model/Project.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com.example.collaborative_code_editor/model/User.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com.example.collaborative_code_editor/repository/DocumentRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com.example.collaborative_code_editor/repository/DocumentVersionRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com.example.collaborative_code_editor/repository/ProjectRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com.example.collaborative_code_editor/repository/UserRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com.example.collaborative_code_editor/security/JwtFilter.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com.example.collaborative_code_editor/security/JwtUtil.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com.example.collaborative_code_editor/service/AuthService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com.example.collaborative_code_editor/service/DocumentService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com.example.collaborative_code_editor/service/ProjectService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/example/collaborative_code_editor/CollaborativeCodeEditorApplicationTests.java" beforeDir="false" />
+    <list default="true" id="b4606a95-179c-499a-883d-a0809ffcacb2" name="Changes" comment="add Monaco code editor component">
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com.example.collaborative_code_editor/config/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com.example.collaborative_code_editor/config/SecurityConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com.example.collaborative_code_editor/controller/ProjectController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com.example.collaborative_code_editor/controller/ProjectController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com.example.collaborative_code_editor/security/JwtFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com.example.collaborative_code_editor/security/JwtFilter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/App.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/App.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/pages/Projects.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/Projects.jsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -51,23 +25,33 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
-  "lastFilter": {
-    "state": "OPEN",
-    "assignee": "mohammadyousef134"
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;mohammadyousef134&quot;
   }
-}]]></component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/mohammadyousef134/Collaborative_Code_Editor.git",
-    "accountId": "676b203c-921c-4e44-87bf-2480e6c73266"
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/mohammadyousef134/Collaborative_Code_Editor.git&quot;,
+    &quot;accountId&quot;: &quot;676b203c-921c-4e44-87bf-2480e6c73266&quot;
   }
-}]]></component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "customColor": "",
-  "associatedIndex": 6
-}]]></component>
+}</component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="mavenHomeTypeForPersistence" value="WRAPPER" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;customColor&quot;: &quot;&quot;,
+  &quot;associatedIndex&quot;: 6
+}</component>
   <component name="ProjectId" id="3Agdoj9oIuX7NdOncf24Atvo53l" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="1" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -78,7 +62,10 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
     "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "master"
+    "Spring Boot.CollaborativeCodeEditorApplication.executor": "Run",
+    "git-widget-placeholder": "master",
+    "ignore.virus.scanning.warn.message": "true",
+    "settings.editor.selected.configurable": "preferences.fileTypes"
   }
 }]]></component>
   <component name="SharedIndexes">
@@ -96,6 +83,23 @@
       <option name="presentableId" value="Default" />
       <updated>1773018328489</updated>
     </task>
+    <task id="LOCAL-00001" summary="add Monaco code editor component">
+      <option name="closed" value="true" />
+      <created>1773116927025</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1773116927025</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="add Monaco code editor component" />
+    <option name="LAST_COMMIT_MESSAGE" value="add Monaco code editor component" />
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
   </component>
 </project>
