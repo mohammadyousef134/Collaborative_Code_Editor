@@ -1,10 +1,12 @@
 package com.example.collaborative_code_editor.service;
 
+import com.example.collaborative_code_editor.entity.ProjectInvitation;
 import com.example.collaborative_code_editor.entity.ProjectMember;
 import com.example.collaborative_code_editor.exception.ForbiddenException;
 import com.example.collaborative_code_editor.exception.ResourceNotFoundException;
 import com.example.collaborative_code_editor.entity.Project;
 import com.example.collaborative_code_editor.entity.User;
+import com.example.collaborative_code_editor.repository.ProjectInvitationRepository;
 import com.example.collaborative_code_editor.repository.ProjectMemberRepository;
 import com.example.collaborative_code_editor.repository.ProjectRepository;
 import com.example.collaborative_code_editor.repository.UserRepository;
@@ -21,6 +23,8 @@ public class ProjectService {
     private UserRepository userRepo;
     @Autowired
     private ProjectMemberRepository memberRepo;
+    @Autowired
+    private ProjectInvitationRepository invitationRepo;
 
     private void checkAccess(Project project, Long userId) {
 
@@ -57,9 +61,62 @@ public class ProjectService {
 
     public void DeleteProject(Long projectId, Long userId) {
         Project project = repo.findById(projectId).orElseThrow(() -> new ResourceNotFoundException("Project not found"));
-        if (!project.getOwner().getId().equals(userId)) {
-            throw new ForbiddenException("You are not allowed to delete this project");
-        }
+        checkAccess(project, userId);
         repo.delete(project);
+    }
+
+    public void inviteUser(Long projectId, Long userId, String email) {
+        Project project = repo.findById(projectId)
+                .orElseThrow(() -> new ResourceNotFoundException("Project not found"));
+
+        User user = userRepo.findByEmail(email)
+                .orElseThrow(() -> new ResourceNotFoundException("User not found"));
+
+        if (!project.getOwner().getId().equals(userId)) {
+            throw new ForbiddenException("Only owner can invite users");
+        }
+        if(memberRepo.existsByProjectIdAndUserId(projectId, user.getId())){
+            throw new RuntimeException("User already member");
+        }
+
+        ProjectInvitation invitation = new ProjectInvitation();
+        invitation.setProject(project);
+        invitation.setStatus("PENDING");
+        invitation.setUser(user);
+
+        invitationRepo.save(invitation);
+    }
+
+    public void acceptInvitation(Long invitationId, Long userId) {
+
+        ProjectInvitation invitation = invitationRepo.findById(invitationId)
+                .orElseThrow(() -> new ResourceNotFoundException("Invitation not found"));
+
+        if (!invitation.getUser().getId().equals(userId)) {
+            throw new ForbiddenException("This invitation is not for you");
+        }
+
+        ProjectMember member = new ProjectMember();
+        member.setProject(invitation.getProject());
+        member.setUser(invitation.getUser());
+
+        memberRepo.save(member);
+
+        invitation.setStatus("ACCEPTED");
+        invitationRepo.save(invitation);
+    }
+
+    public void declineInvitation(Long invitationId, Long userId) {
+
+        ProjectInvitation invitation = invitationRepo.findById(invitationId)
+                .orElseThrow(() -> new ResourceNotFoundException("Invitation not found"));
+
+        if (!invitation.getUser().getId().equals(userId)) {
+            throw new ForbiddenException("This invitation is not for you");
+        }
+
+        invitation.setStatus("DECLINED");
+
+        invitationRepo.save(invitation);
     }
 }
