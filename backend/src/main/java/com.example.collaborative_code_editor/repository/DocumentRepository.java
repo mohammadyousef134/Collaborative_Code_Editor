@@ -1,6 +1,6 @@
 package com.example.collaborative_code_editor.repository;
 
-import com.example.collaborative_code_editor.model.Document;
+import com.example.collaborative_code_editor.entity.Document;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

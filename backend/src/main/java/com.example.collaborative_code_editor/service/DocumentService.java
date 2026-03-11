@@ -2,10 +2,10 @@ package com.example.collaborative_code_editor.service;
 
 import com.example.collaborative_code_editor.exception.ForbiddenException;
 import com.example.collaborative_code_editor.exception.ResourceNotFoundException;
-import com.example.collaborative_code_editor.model.Document;
-import com.example.collaborative_code_editor.model.DocumentVersion;
-import com.example.collaborative_code_editor.model.Project;
-import com.example.collaborative_code_editor.model.User;
+import com.example.collaborative_code_editor.entity.Document;
+import com.example.collaborative_code_editor.entity.DocumentVersion;
+import com.example.collaborative_code_editor.entity.Project;
+import com.example.collaborative_code_editor.entity.User;
 import com.example.collaborative_code_editor.repository.DocumentRepository;
 import com.example.collaborative_code_editor.repository.DocumentVersionRepository;
 import com.example.collaborative_code_editor.repository.ProjectRepository;

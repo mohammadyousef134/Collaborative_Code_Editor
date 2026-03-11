@@ -1,7 +1,7 @@
 package com.example.collaborative_code_editor.controller;
 
 import com.example.collaborative_code_editor.DTO.CreateProjectRequest;
-import com.example.collaborative_code_editor.model.Project;
+import com.example.collaborative_code_editor.entity.Project;
 import com.example.collaborative_code_editor.service.ProjectService;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;

@@ -1,6 +1,5 @@
-package com.example.collaborative_code_editor.model;
+package com.example.collaborative_code_editor.entity;
 
-import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;

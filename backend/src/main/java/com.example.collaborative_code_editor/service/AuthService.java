@@ -5,7 +5,7 @@ import com.example.collaborative_code_editor.DTO.loginRequest;
 import com.example.collaborative_code_editor.enums.Role;
 import com.example.collaborative_code_editor.exception.ForbiddenException;
 import com.example.collaborative_code_editor.exception.ResourceNotFoundException;
-import com.example.collaborative_code_editor.model.User;
+import com.example.collaborative_code_editor.entity.User;
 import com.example.collaborative_code_editor.repository.UserRepository;
 import com.example.collaborative_code_editor.security.JwtUtil;
 import org.springframework.security.crypto.password.PasswordEncoder;

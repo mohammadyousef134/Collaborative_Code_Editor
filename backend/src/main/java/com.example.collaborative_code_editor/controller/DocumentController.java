@@ -2,8 +2,8 @@ package com.example.collaborative_code_editor.controller;
 
 import com.example.collaborative_code_editor.DTO.CreateDocumentRequest;
 import com.example.collaborative_code_editor.DTO.UpdateDocumentRequest;
-import com.example.collaborative_code_editor.model.Document;
-import com.example.collaborative_code_editor.model.DocumentVersion;
+import com.example.collaborative_code_editor.entity.Document;
+import com.example.collaborative_code_editor.entity.DocumentVersion;
 import com.example.collaborative_code_editor.service.DocumentService;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
