@@ -1,6 +1,6 @@
 package com.example.collaborative_code_editor.controller;
 
-import com.example.collaborative_code_editor.DTO.CreateInviteToProjectRequest;
+import com.example.collaborative_code_editor.DTO.InviteUserToProjectRequest;
 import com.example.collaborative_code_editor.DTO.CreateProjectRequest;
 import com.example.collaborative_code_editor.entity.Project;
 import com.example.collaborative_code_editor.service.ProjectService;
@@ -50,7 +50,7 @@ public class ProjectController {
     @PostMapping("/{projectId}/invite")
     public void inviteUser(
             @PathVariable Long projectId,
-            @RequestBody CreateInviteToProjectRequest request
+            @RequestBody InviteUserToProjectRequest request
             ) {
 
         Long userId = (Long) SecurityContextHolder
@@ -59,25 +59,6 @@ public class ProjectController {
                 .getPrincipal();
 
         service.inviteUser(projectId, userId, request.getEmail());
-    }
-    @PostMapping("/invitations/{invitationId}/accept")
-    public void acceptInvitation(@PathVariable Long invitationId) {
-
-        Long userId = (Long) SecurityContextHolder
-                .getContext()
-                .getAuthentication()
-                .getPrincipal();
-
-        service.acceptInvitation(invitationId, userId);
-    }
-    @PostMapping("/invitations/{invitationId}/decline")
-    public void declineInvitation(@PathVariable Long invitationId) {
-
-        Long userId = (Long) SecurityContextHolder
-                .getContext()
-                .getAuthentication()
-                .getPrincipal();
-        service.declineInvitation(invitationId, userId);
     }
 
 

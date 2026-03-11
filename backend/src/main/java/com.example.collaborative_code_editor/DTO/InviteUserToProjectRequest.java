@@ -5,6 +5,6 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class CreateInviteToProjectRequest {
+public class InviteUserToProjectRequest {
     private String email;
 }

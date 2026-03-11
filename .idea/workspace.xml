@@ -4,10 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b4606a95-179c-499a-883d-a0809ffcacb2" name="Changes" comment="add ProjectMember">
+    <list default="true" id="b4606a95-179c-499a-883d-a0809ffcacb2" name="Changes" comment="email-based project invitation">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com.example.collaborative_code_editor/DTO/CreateInviteToProjectRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com.example.collaborative_code_editor/DTO/InviteUserToProjectRequest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/src/main/java/com.example.collaborative_code_editor/controller/ProjectController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com.example.collaborative_code_editor/controller/ProjectController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com.example.collaborative_code_editor/service/DocumentService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com.example.collaborative_code_editor/service/DocumentService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/src/main/java/com.example.collaborative_code_editor/service/ProjectService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com.example.collaborative_code_editor/service/ProjectService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/CodeEditor.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/CodeEditor.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/pages/DocumentEditor.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/DocumentEditor.jsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -107,14 +113,23 @@
       <option name="project" value="LOCAL" />
       <updated>1773223453689</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="email-based project invitation">
+      <option name="closed" value="true" />
+      <created>1773227035584</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1773227035585</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="add Monaco code editor component" />
     <MESSAGE value="integrate yjs CRDT with monaco editor" />
     <MESSAGE value="add ProjectMember" />
-    <option name="LAST_COMMIT_MESSAGE" value="add ProjectMember" />
+    <MESSAGE value="email-based project invitation" />
+    <option name="LAST_COMMIT_MESSAGE" value="email-based project invitation" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

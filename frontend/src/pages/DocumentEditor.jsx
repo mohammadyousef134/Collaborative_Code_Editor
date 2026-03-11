@@ -1,31 +1,51 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import Editor from "@monaco-editor/react";
 import api from "../api/api";
 import CodeEditor from "../components/CodeEditor";
 
 function DocumentEditor() {
 
-    const { id } = useParams();
-    const { projectId } = useParams();
+    const {projectId, id } = useParams();
+
     const [code, setCode] = useState("");
+    const [loaded, setLoaded] = useState(false);
 
     useEffect(() => {
-        loadDocument()
+        loadDocument();
     }, []);
 
+    useEffect(() => {
+
+        if (!loaded) return;
+
+        const timeout = setTimeout(() => {
+            saveDocument();
+        }, 1000);
+
+        return () => clearTimeout(timeout);
+
+    }, [code]);
+
+    const saveDocument = async () => {
+        await api.put(`/projects/${projectId}/documents/${id}`, {
+            content: code
+        });
+
+    };
+
     const loadDocument = async () => {
+
         const res = await api.get(
             `/projects/${projectId}/documents/${id}`
         );
-        // console.log("Document response:", res.data);
 
         setCode(res.data.content || "");
+        setLoaded(true);
     };
 
     return (
         <CodeEditor
-            code = {code}
+            code={code}
             setCode={setCode}
         />
     );

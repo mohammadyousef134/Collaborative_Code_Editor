@@ -7,19 +7,18 @@ function CodeEditor({ code, setCode }) {
 
   const editorRef = useRef(null);
   const ydocRef = useRef(null);
+  const yTextRef = useRef(null);
 
-  function handleEditorDidMount(editor, monaco) {
+  function handleEditorDidMount(editor) {
 
     editorRef.current = editor;
 
-    // Create Yjs document
     const ydoc = new Y.Doc();
     ydocRef.current = ydoc;
 
-    // Create shared text type
     const yText = ydoc.getText("monaco");
+    yTextRef.current = yText;
 
-    // Bind Monaco to Yjs
     new MonacoBinding(
       yText,
       editor.getModel(),
@@ -27,9 +26,23 @@ function CodeEditor({ code, setCode }) {
       null
     );
 
-    // Initialize editor content
-    yText.insert(0, code || "");
+    yText.observe(() => {
+      const updatedText = yText.toString();
+      setCode(updatedText);
+    });
   }
+
+  // Sync initial document content when it loads
+  useEffect(() => {
+
+    if (!yTextRef.current) return;
+
+    const yText = yTextRef.current;
+
+    yText.delete(0, yText.length);
+    yText.insert(0, code || "");
+
+  }, [code]);
 
   return (
     <Editor

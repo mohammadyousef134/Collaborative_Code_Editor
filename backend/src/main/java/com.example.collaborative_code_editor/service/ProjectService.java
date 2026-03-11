@@ -1,5 +1,6 @@
 package com.example.collaborative_code_editor.service;
 
+import com.example.collaborative_code_editor.DTO.InvitationResponse;
 import com.example.collaborative_code_editor.entity.ProjectInvitation;
 import com.example.collaborative_code_editor.entity.ProjectMember;
 import com.example.collaborative_code_editor.exception.ForbiddenException;
@@ -26,15 +27,21 @@ public class ProjectService {
     @Autowired
     private ProjectInvitationRepository invitationRepo;
 
-    private void checkAccess(Project project, Long userId) {
+    private Project getProjectWithAccess(Long projectId, Long userId) {
 
+        Project project = repo.findById(projectId)
+                .orElseThrow(() -> new ResourceNotFoundException("Project not found"));
+
+        // owner allowed
         if (project.getOwner().getId().equals(userId)) {
-            return;
+            return project;
         }
 
-        if (memberRepo.existsByProjectIdAndUserId(project.getId(), userId)) {
-            return;
+        // member allowed
+        if (memberRepo.existsByProjectIdAndUserId(projectId, userId)) {
+            return project;
         }
+
         throw new ForbiddenException("You cannot access this project");
     }
 
@@ -61,7 +68,7 @@ public class ProjectService {
 
     public void DeleteProject(Long projectId, Long userId) {
         Project project = repo.findById(projectId).orElseThrow(() -> new ResourceNotFoundException("Project not found"));
-        checkAccess(project, userId);
+        getProjectWithAccess(projectId, userId);
         repo.delete(project);
     }
 
@@ -118,5 +125,20 @@ public class ProjectService {
         invitation.setStatus("DECLINED");
 
         invitationRepo.save(invitation);
+    }
+
+    public List<InvitationResponse> getMyInvitations(Long userId) {
+
+        List<ProjectInvitation> invitations =
+                invitationRepo.findByUserIdAndStatus(userId, "PENDING");
+
+        return invitations.stream()
+                .map(inv -> new InvitationResponse(
+                        inv.getId(),
+                        inv.getProject().getId(),
+                        inv.getProject().getName(),
+                        inv.getProject().getOwner().getEmail()
+                ))
+                .toList();
     }
 }
