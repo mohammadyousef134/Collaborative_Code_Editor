@@ -3,6 +3,7 @@ import Login from "./pages/Login";
 import Projects from "./pages/projects";
 import Documents from "./pages/Documents";
 import DocumentEditor from "./pages/DocumentEditor";
+import Invitations from "./pages/Invitations";
 
 function App() {
   return (
@@ -15,6 +16,8 @@ function App() {
       <Route path="/projects/:projectId/documents" element={<Documents />} />
       
       <Route path="/projects/:projectId/documents/:id" element={<DocumentEditor />} />
+
+      <Route path="/invitations" element={<Invitations />} />
 
     </Routes>
   );

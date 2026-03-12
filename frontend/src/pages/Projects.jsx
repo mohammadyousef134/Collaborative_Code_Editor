@@ -69,6 +69,10 @@ function Projects() {
         </div>
       ))}
 
+      <button onClick={() => navigate("/invitations")}>
+        Invitations
+      </button>
+
     </div>
   );
 }

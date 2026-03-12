@@ -9,10 +9,24 @@ function Documents() {
 
   const [documents, setDocuments] = useState([]);
   const [newDocumentName, setNewDocumentName] = useState("");
+  const [inviteEmail, setInviteEmail] = useState("");
 
   useEffect(() => {
     loadDocuments();
   }, []);
+
+  const inviteUser = async () => {
+    if (!inviteEmail.trim()) return;
+
+    await api.post(`/projects/${projectId}/invite`, {
+      email: inviteEmail
+    });
+
+    setInviteEmail("");
+
+    alert("Invitation sent");
+
+  };
 
   const loadDocuments = async () => {
 
@@ -49,7 +63,21 @@ function Documents() {
   return (
     <div>
 
-      <h2>Documents</h2>
+      <h3>Invite collaborator</h3>
+
+      <input
+        placeholder="User email"
+        value={inviteEmail}
+        onChange={(e) => setInviteEmail(e.target.value)}
+      />
+
+      <button onClick={inviteUser}>
+        Invite
+      </button>
+
+      <hr />
+
+      <h3>Documents</h3>
 
       <input
         placeholder="New document name"
