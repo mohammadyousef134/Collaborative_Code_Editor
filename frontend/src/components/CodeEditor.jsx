@@ -1,54 +1,36 @@
-import { useEffect, useRef } from "react";
 import Editor from "@monaco-editor/react";
-import * as Y from "yjs";
-import { MonacoBinding } from "y-monaco";
 
-function CodeEditor({ code, setCode }) {
-
-  const editorRef = useRef(null);
-  const ydocRef = useRef(null);
-  const yTextRef = useRef(null);
+function CodeEditor({ code, setCode, editorRef, onEdit, isRemoteChange }) {
 
   function handleEditorDidMount(editor) {
 
     editorRef.current = editor;
 
-    const ydoc = new Y.Doc();
-    ydocRef.current = ydoc;
+    editor.onDidChangeModelContent((event) => {
 
-    const yText = ydoc.getText("monaco");
-    yTextRef.current = yText;
+      const value = editor.getValue();
+      setCode(value);
 
-    new MonacoBinding(
-      yText,
-      editor.getModel(),
-      new Set([editor]),
-      null
-    );
+      if (!isRemoteChange.current) {
+        event.changes.forEach((change) => {
+          onEdit?.({
+            position: change.rangeOffset,
+            length: change.rangeLength,
+            text: change.text,
+          });
+        });
+      }
 
-    yText.observe(() => {
-      const updatedText = yText.toString();
-      setCode(updatedText);
     });
+
   }
-
-  // Sync initial document content when it loads
-  useEffect(() => {
-
-    if (!yTextRef.current) return;
-
-    const yText = yTextRef.current;
-
-    yText.delete(0, yText.length);
-    yText.insert(0, code || "");
-
-  }, [code]);
 
   return (
     <Editor
       height="90vh"
       defaultLanguage="javascript"
       theme="vs-dark"
+      defaultValue={code}
       onMount={handleEditorDidMount}
     />
   );
