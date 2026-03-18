@@ -4,13 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b4606a95-179c-499a-883d-a0809ffcacb2" name="Changes" comment="add websocket">
+    <list default="true" id="b4606a95-179c-499a-883d-a0809ffcacb2" name="Changes" comment=" Add Yjs CRDT">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/CodeEditor.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/CodeEditor.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/pages/DocumentEditor.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/DocumentEditor.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/websocket/websocket.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/websocket/websocket.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com.example.collaborative_code_editor/config/WebSocketConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com.example.collaborative_code_editor/config/WebSocketConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com.example.collaborative_code_editor/controller/DocumentWebSocketController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com.example.collaborative_code_editor/controller/DocumentWebSocketController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -127,7 +125,15 @@
       <option name="project" value="LOCAL" />
       <updated>1773681421910</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary=" Add Yjs CRDT">
+      <option name="closed" value="true" />
+      <created>1773836900599</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1773836900599</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -136,7 +142,8 @@
     <MESSAGE value="add ProjectMember" />
     <MESSAGE value="email-based project invitation" />
     <MESSAGE value="add websocket" />
-    <option name="LAST_COMMIT_MESSAGE" value="add websocket" />
+    <MESSAGE value=" Add Yjs CRDT" />
+    <option name="LAST_COMMIT_MESSAGE" value=" Add Yjs CRDT" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
