@@ -1,41 +1,41 @@
-import { Client } from "@stomp/stompjs";
-import SockJS from "sockjs-client";
+// import { Client } from "@stomp/stompjs";
+// import SockJS from "sockjs-client";
 
-let stompClient = null;
+// let stompClient = null;
 
-export function connectWebSocket(documentId, onMessageReceived) {
+// export function connectWebSocket(documentId, onMessageReceived) {
 
-  const socket = new SockJS("http://localhost:8080/ws");
+//   const socket = new SockJS("http://localhost:8080/ws");
 
-  stompClient = new Client({
-    webSocketFactory: () => socket,
+//   stompClient = new Client({
+//     webSocketFactory: () => socket,
 
-    reconnectDelay: 5000,
+//     reconnectDelay: 5000,
 
-    onConnect: () => {
+//     onConnect: () => {
 
-      console.log("Connected to WebSocket");
+//       console.log("Connected to WebSocket");
 
-      stompClient.subscribe(`/topic/document/${documentId}`, (message) => {
-        if (onMessageReceived) {
-          onMessageReceived(message.body);
-        }
+//       stompClient.subscribe(`/topic/document/${documentId}`, (message) => {
+//         if (onMessageReceived) {
+//           onMessageReceived(message.body);
+//         }
 
-      });
+//       });
 
-    }
-  });
+//     }
+//   });
 
-  stompClient.activate();
-}
+//   stompClient.activate();
+// }
 
-export function sendMessage(documentId, message) {
+// export function sendMessage(documentId, message) {
 
-  if (stompClient && stompClient.connected) {
-    stompClient.publish({
-      destination: `/app/document/${documentId}/edit`,
-      body: message
-    });
+//   if (stompClient && stompClient.connected) {
+//     stompClient.publish({
+//       destination: `/app/document/${documentId}/edit`,
+//       body: message
+//     });
 
-  }
-}
+//   }
+// }
