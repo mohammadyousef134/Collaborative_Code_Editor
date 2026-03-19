@@ -6,16 +6,18 @@ import CodeEditor from "../components/CodeEditor";
 function DocumentEditor() {
   const { projectId, id } = useParams();
   const [initialContent, setInitialContent] = useState(null);
+  const [language, setLanguage] = useState(null);
 
   useEffect(() => {
     const load = async () => {
       const res = await api.get(`/projects/${projectId}/documents/${id}`);
       setInitialContent(res.data.content || "");
+      setLanguage(res.data.language || "javascript")
     };
     load();
   }, [id, projectId]);
 
-  if (initialContent === null) {
+  if (initialContent === null || language === null) {
     return <div style={{ color: "#fff", padding: 20 }}>Loading...</div>;
   }
 
@@ -24,6 +26,7 @@ function DocumentEditor() {
       projectId={projectId}
       documentId={id}
       initialContent={initialContent}
+      language={language}
     />
   );
 }

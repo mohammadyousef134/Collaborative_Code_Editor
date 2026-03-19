@@ -24,6 +24,8 @@ public class Document {
     @JoinColumn(name = "project_id", nullable = false)
     private Project project;
 
+    private String language;
+
     private LocalDateTime createdAt;
 
 }

@@ -38,7 +38,7 @@ public class DocumentController {
     @PostMapping
     public Document createNewDocument(@PathVariable Long projectId, @RequestBody CreateDocumentRequest request) {
         Long userId = getUserId();
-        return service.createDocument(projectId, userId, request.getName());
+        return service.createDocument(projectId, userId, request.getName(), request.getLanguage());
     }
 
     @PutMapping("/{documentId}")

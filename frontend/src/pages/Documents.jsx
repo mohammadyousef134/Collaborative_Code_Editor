@@ -10,6 +10,7 @@ function Documents() {
   const [documents, setDocuments] = useState([]);
   const [newDocumentName, setNewDocumentName] = useState("");
   const [inviteEmail, setInviteEmail] = useState("");
+  const [language, setLanguage] = useState("javascript");
 
   useEffect(() => {
     loadDocuments();
@@ -44,7 +45,8 @@ function Documents() {
     if (!newDocumentName.trim()) return;
 
     await api.post(`/projects/${projectId}/documents`, {
-      name: newDocumentName
+      name: newDocumentName,
+      language: language
     });
 
     setNewDocumentName("");
@@ -84,6 +86,12 @@ function Documents() {
         value={newDocumentName}
         onChange={(e) => setNewDocumentName(e.target.value)}
       />
+      <select value={language} onChange={(e) => setLanguage(e.target.value)}>
+        <option value="javascript">JavaScript</option>
+        <option value="python">Python</option>
+        <option value="java">Java</option>
+        <option value="cpp">C++</option>
+      </select>
 
       <button onClick={createDocument}>
         Create Document

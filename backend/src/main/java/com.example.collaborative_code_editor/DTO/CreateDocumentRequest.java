@@ -7,4 +7,5 @@ import lombok.Setter;
 @Setter
 public class CreateDocumentRequest {
     private String name;
+    private String language;
 }

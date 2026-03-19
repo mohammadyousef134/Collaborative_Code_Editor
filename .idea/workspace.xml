@@ -4,18 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b4606a95-179c-499a-883d-a0809ffcacb2" name="Changes" comment="Refactoring">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    <list default="true" id="b4606a95-179c-499a-883d-a0809ffcacb2" name="Changes" comment="fix document autosave">
       <change beforePath="$PROJECT_DIR$/backend/src/main/java/com.example.collaborative_code_editor/DTO/CreateDocumentRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com.example.collaborative_code_editor/DTO/CreateDocumentRequest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com.example.collaborative_code_editor/config/WebSocketConfig.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/src/main/java/com.example.collaborative_code_editor/controller/DocumentController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com.example.collaborative_code_editor/controller/DocumentController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com.example.collaborative_code_editor/controller/DocumentWebSocketController.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/src/main/java/com.example.collaborative_code_editor/entity/Document.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com.example.collaborative_code_editor/entity/Document.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/src/main/java/com.example.collaborative_code_editor/service/DocumentService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com.example.collaborative_code_editor/service/DocumentService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/App.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/App.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/components/CodeEditor.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/CodeEditor.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/pages/DocumentEditor.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/DocumentEditor.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/websocket/websocket.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/pages/Documents.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/Documents.jsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -148,7 +144,15 @@
       <option name="project" value="LOCAL" />
       <updated>1773837743403</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="fix document autosave">
+      <option name="closed" value="true" />
+      <created>1773918936951</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1773918936951</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -159,7 +163,8 @@
     <MESSAGE value="add websocket" />
     <MESSAGE value=" Add Yjs CRDT" />
     <MESSAGE value="Refactoring" />
-    <option name="LAST_COMMIT_MESSAGE" value="Refactoring" />
+    <MESSAGE value="fix document autosave" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix document autosave" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

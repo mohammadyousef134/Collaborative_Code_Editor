@@ -64,7 +64,7 @@ public class DocumentService {
         return DocRepo.findByProjectId(projectId);
     }
 
-    public Document createDocument(Long projectId, Long userId, String name) {
+    public Document createDocument(Long projectId, Long userId, String name, String language) {
 
         Project project = ProRepo.findById(projectId)
                 .orElseThrow(() -> new ResourceNotFoundException("Project not found"));
@@ -78,7 +78,7 @@ public class DocumentService {
         doc.setName(name);
         doc.setProject(project);
         doc.setCreatedAt(LocalDateTime.now());
-
+        doc.setLanguage(language);
         return DocRepo.save(doc);
     }
 

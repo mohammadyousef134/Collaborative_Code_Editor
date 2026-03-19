@@ -7,7 +7,7 @@ import api from "../api/api";
 
 const SAVE_DELAY_MS = 1000;
 
-function CodeEditor({ projectId, documentId, initialContent }) {
+function CodeEditor({ projectId, documentId, initialContent, language }) {
   const ydocRef = useRef(null);
   const providerRef = useRef(null);
   const bindingRef = useRef(null);
@@ -97,7 +97,7 @@ function CodeEditor({ projectId, documentId, initialContent }) {
   return (
     <Editor
       height="90vh"
-      defaultLanguage="javascript"
+      language={language}
       theme="vs-dark"
       onMount={handleEditorDidMount}
     />
