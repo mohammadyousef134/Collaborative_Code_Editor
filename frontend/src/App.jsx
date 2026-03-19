@@ -1,6 +1,6 @@
 import {Routes, Route} from "react-router-dom";
 import Login from "./pages/Login";
-import Projects from "./pages/projects";
+import Projects from "./pages/Projects";
 import Documents from "./pages/Documents";
 import DocumentEditor from "./pages/DocumentEditor";
 import Invitations from "./pages/Invitations";

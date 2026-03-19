@@ -3,24 +3,42 @@ import Editor from "@monaco-editor/react";
 import * as Y from "yjs";
 import { WebsocketProvider } from "y-websocket";
 import { MonacoBinding } from "y-monaco";
+import api from "../api/api";
 
-function CodeEditor({ documentId, initialContent }) {
+const SAVE_DELAY_MS = 1000;
 
-  const ydocRef    = useRef(null);
+function CodeEditor({ projectId, documentId, initialContent }) {
+  const ydocRef = useRef(null);
   const providerRef = useRef(null);
-  const bindingRef  = useRef(null);
+  const bindingRef = useRef(null);
+  const saveTimeoutRef = useRef(null);
+  const savePathRef = useRef(`/projects/${projectId}/documents/${documentId}`);
+  const currentContentRef = useRef(initialContent ?? "");
+  const lastSavedContentRef = useRef(initialContent ?? "");
+
+  function scheduleSave(content) {
+    if (saveTimeoutRef.current) {
+      clearTimeout(saveTimeoutRef.current);
+    }
+    
+    saveTimeoutRef.current = setTimeout(async () => {
+      if (content === lastSavedContentRef.current) return;
+      
+      try {
+        await api.put(savePathRef.current, { content });
+        lastSavedContentRef.current = content;
+      } catch (error) {
+        console.error("Failed to save document", error);
+      }
+    }, SAVE_DELAY_MS);
+  }
 
   function handleEditorDidMount(editor) {
-
-    // 1. Create the shared Yjs document
     const ydoc = new Y.Doc();
     ydocRef.current = ydoc;
 
-    // 2. Get a shared text type — this is the actual content all clients share
     const ytext = ydoc.getText("monaco");
 
-    // 3. Connect to your Yjs server (server.cjs running on port 1234)
-    //    All clients with the same documentId join the same room and sync
     const provider = new WebsocketProvider(
       "ws://localhost:1234",
       `document-${documentId}`,
@@ -28,17 +46,25 @@ function CodeEditor({ documentId, initialContent }) {
     );
     providerRef.current = provider;
 
-    // 4. Once synced with the server, seed content if the doc is brand new
     provider.on("sync", (isSynced) => {
       if (isSynced && ytext.length === 0 && initialContent) {
-        ytext.insert(0, initialContent);
+        ydoc.transact(() => {
+          ytext.insert(0, initialContent);
+        }, "initial-load");
       }
     });
 
-    // 5. Bind Yjs ↔ Monaco — this is the magic line.
-    //    Any local edit updates ytext → broadcasts to all clients.
-    //    Any remote ytext change updates Monaco automatically.
-    //    You no longer need sendMessage, isRemoteChange, or applyEdits.
+    ytext.observe((event) => {
+      if (event.transaction.origin === "initial-load") {
+        currentContentRef.current = ytext.toString();
+        return;
+      }
+
+      const nextContent = ytext.toString();
+      currentContentRef.current = nextContent;
+      scheduleSave(nextContent);
+    });
+
     const binding = new MonacoBinding(
       ytext,
       editor.getModel(),
@@ -46,12 +72,22 @@ function CodeEditor({ documentId, initialContent }) {
       provider.awareness
     );
     bindingRef.current = binding;
-
   }
 
-  // Clean up everything when the component unmounts
   useEffect(() => {
+    const savePath = savePathRef.current;
+
     return () => {
+      if (saveTimeoutRef.current) {
+        clearTimeout(saveTimeoutRef.current);
+      }
+
+      if (currentContentRef.current !== lastSavedContentRef.current) {
+        api.put(savePath, { content: currentContentRef.current }).catch((error) => {
+          console.error("Failed to save document during cleanup", error);
+        });
+      }
+
       bindingRef.current?.destroy();
       providerRef.current?.destroy();
       ydocRef.current?.destroy();
