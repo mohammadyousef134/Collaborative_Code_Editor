@@ -3,9 +3,9 @@ package com.example.collaborative_code_editor.DTO;
 import lombok.Getter;
 import lombok.Setter;
 
-@Setter
 @Getter
-public class UpdateDocumentRequest {
-    private String content;
-
+@Setter
+public class CreateFileRequest {
+    private String name;
+    private String language;
 }

@@ -4,27 +4,26 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b4606a95-179c-499a-883d-a0809ffcacb2" name="Changes" comment="add language support for documents">
-      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com.example.collaborative_code_editor/repository/ReopRepository.java" afterDir="false" />
+    <list default="true" id="b4606a95-179c-499a-883d-a0809ffcacb2" name="Changes" comment="add blob and BlobRepository">
+      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com.example.collaborative_code_editor/entity/Node.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com.example.collaborative_code_editor/enums/NodeType.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com.example.collaborative_code_editor/repository/NodeRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/backend/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com.example.collaborative_code_editor/DTO/CreateProjectRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com.example.collaborative_code_editor/DTO/CreateRepoRequest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com.example.collaborative_code_editor/DTO/InvitationResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com.example.collaborative_code_editor/DTO/InvitationResponse.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com.example.collaborative_code_editor/DTO/InviteUserToProjectRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com.example.collaborative_code_editor/DTO/InviteUserToRepoRequest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com.example.collaborative_code_editor/controller/DocumentController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com.example.collaborative_code_editor/controller/DocumentController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com.example.collaborative_code_editor/controller/InvitationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com.example.collaborative_code_editor/controller/InvitationController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com.example.collaborative_code_editor/controller/ProjectController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com.example.collaborative_code_editor/controller/RepoController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com.example.collaborative_code_editor/entity/Document.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com.example.collaborative_code_editor/entity/Document.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com.example.collaborative_code_editor/entity/Project.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com.example.collaborative_code_editor/entity/Repo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com.example.collaborative_code_editor/entity/ProjectInvitation.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com.example.collaborative_code_editor/entity/RepoInvitation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com.example.collaborative_code_editor/entity/ProjectMember.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com.example.collaborative_code_editor/entity/RepoMember.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com.example.collaborative_code_editor/repository/DocumentRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com.example.collaborative_code_editor/repository/DocumentRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com.example.collaborative_code_editor/repository/ProjectInvitationRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com.example.collaborative_code_editor/repository/RepoInvitationRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com.example.collaborative_code_editor/repository/ProjectMemberRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com.example.collaborative_code_editor/repository/RepoMemberRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com.example.collaborative_code_editor/repository/ProjectRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com.example.collaborative_code_editor/service/DocumentService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com.example.collaborative_code_editor/service/DocumentService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com.example.collaborative_code_editor/service/ProjectService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com.example.collaborative_code_editor/service/RepoService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/node_modules/lib0/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/backend/node_modules/lib0/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/node_modules/lib0/dist/dom-7e625b09.cjs" beforeDir="false" afterPath="$PROJECT_DIR$/backend/node_modules/lib0/dist/dom-7e625b09.cjs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/node_modules/lib0/dist/dom-7e625b09.cjs.map" beforeDir="false" afterPath="$PROJECT_DIR$/backend/node_modules/lib0/dist/dom-7e625b09.cjs.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/node_modules/lib0/dist/environment-1c97264d.cjs" beforeDir="false" afterPath="$PROJECT_DIR$/backend/node_modules/lib0/dist/environment-1c97264d.cjs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/node_modules/lib0/dist/environment-1c97264d.cjs.map" beforeDir="false" afterPath="$PROJECT_DIR$/backend/node_modules/lib0/dist/environment-1c97264d.cjs.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/node_modules/lib0/dist/testing.cjs" beforeDir="false" afterPath="$PROJECT_DIR$/backend/node_modules/lib0/dist/testing.cjs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/node_modules/lib0/dist/testing.cjs.map" beforeDir="false" afterPath="$PROJECT_DIR$/backend/node_modules/lib0/dist/testing.cjs.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com.example.collaborative_code_editor/DTO/CreateDocumentRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com.example.collaborative_code_editor/DTO/CreateFileRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com.example.collaborative_code_editor/DTO/UpdateDocumentRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com.example.collaborative_code_editor/DTO/UpdateFileRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com.example.collaborative_code_editor/controller/DocumentController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com.example.collaborative_code_editor/controller/NodeController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com.example.collaborative_code_editor/entity/Document.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com.example.collaborative_code_editor/entity/DocumentVersion.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com.example.collaborative_code_editor/entity/DocumentVersion.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com.example.collaborative_code_editor/entity/Repo.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com.example.collaborative_code_editor/entity/Repo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com.example.collaborative_code_editor/repository/DocumentRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com.example.collaborative_code_editor/service/DocumentService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com.example.collaborative_code_editor/service/NodeService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -34,8 +33,9 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Interface" />
+        <option value="Enum" />
         <option value="Class" />
+        <option value="Interface" />
       </list>
     </option>
   </component>
@@ -173,7 +173,23 @@
       <option name="project" value="LOCAL" />
       <updated>1773922126448</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="refactor (project -&gt; repo)">
+      <option name="closed" value="true" />
+      <created>1778243326123</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1778243326125</updated>
+    </task>
+    <task id="LOCAL-00011" summary="add blob and BlobRepository">
+      <option name="closed" value="true" />
+      <created>1778247901910</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1778247901910</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -186,7 +202,9 @@
     <MESSAGE value="Refactoring" />
     <MESSAGE value="fix document autosave" />
     <MESSAGE value="add language support for documents" />
-    <option name="LAST_COMMIT_MESSAGE" value="add language support for documents" />
+    <MESSAGE value="refactor (project -&gt; repo)" />
+    <MESSAGE value="add blob and BlobRepository" />
+    <option name="LAST_COMMIT_MESSAGE" value="add blob and BlobRepository" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
