@@ -1,7 +1,7 @@
 package com.example.collaborative_code_editor.controller;
 
 import com.example.collaborative_code_editor.DTO.InvitationResponse;
-import com.example.collaborative_code_editor.service.ProjectService;
+import com.example.collaborative_code_editor.service.RepoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
@@ -12,7 +12,7 @@ import java.util.List;
 @RequestMapping("/invitations")
 public class InvitationController {
     @Autowired
-    private ProjectService service;
+    private RepoService service;
 
     @GetMapping
     public List<InvitationResponse> getMyInvitations() {

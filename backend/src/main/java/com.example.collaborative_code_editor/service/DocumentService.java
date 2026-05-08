@@ -1,15 +1,15 @@
 package com.example.collaborative_code_editor.service;
 
+import com.example.collaborative_code_editor.entity.Repo;
 import com.example.collaborative_code_editor.exception.ForbiddenException;
 import com.example.collaborative_code_editor.exception.ResourceNotFoundException;
 import com.example.collaborative_code_editor.entity.Document;
 import com.example.collaborative_code_editor.entity.DocumentVersion;
-import com.example.collaborative_code_editor.entity.Project;
 import com.example.collaborative_code_editor.entity.User;
 import com.example.collaborative_code_editor.repository.DocumentRepository;
 import com.example.collaborative_code_editor.repository.DocumentVersionRepository;
-import com.example.collaborative_code_editor.repository.ProjectRepository;
-import com.example.collaborative_code_editor.repository.ProjectMemberRepository;
+import com.example.collaborative_code_editor.repository.ReopRepository;
+import com.example.collaborative_code_editor.repository.RepoMemberRepository;
 import com.example.collaborative_code_editor.repository.UserRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,15 +23,15 @@ public class DocumentService {
 
     private final DocumentVersionRepository VerRepo;
     private final DocumentRepository DocRepo;
-    private final ProjectRepository ProRepo;
+    private final ReopRepository ProRepo;
 
     @Autowired
     private UserRepository userRepo;
 
     @Autowired
-    private ProjectMemberRepository memberRepo;
+    private RepoMemberRepository memberRepo;
 
-    public DocumentService(ProjectRepository ProRepo,
+    public DocumentService(ReopRepository ProRepo,
                            DocumentRepository DocRepo,
                            DocumentVersionRepository VerRepo) {
         this.ProRepo = ProRepo;
@@ -39,61 +39,61 @@ public class DocumentService {
         this.VerRepo = VerRepo;
     }
 
-    private Project getProjectWithAccess(Long projectId, Long userId) {
+    private Repo getRepoWithAccess(Long repoId, Long userId) {
 
-        Project project = ProRepo.findById(projectId)
-                .orElseThrow(() -> new ResourceNotFoundException("Project not found"));
+        Repo repo = ProRepo.findById(repoId)
+                .orElseThrow(() -> new ResourceNotFoundException("Repo not found"));
 
         // owner
-        if (project.getOwner().getId().equals(userId)) {
-            return project;
+        if (repo.getOwner().getId().equals(userId)) {
+            return repo;
         }
 
         // collaborator
-        if (memberRepo.existsByProjectIdAndUserId(projectId, userId)) {
-            return project;
+        if (memberRepo.existsByRepoIdAndUserId(repoId, userId)) {
+            return repo;
         }
 
-        throw new ForbiddenException("You cannot access this project");
+        throw new ForbiddenException("You cannot access this repo");
     }
 
-    public List<Document> getDocuments(Long projectId, Long userId) {
+    public List<Document> getDocuments(Long repoId, Long userId) {
 
-        getProjectWithAccess(projectId, userId);
+        getRepoWithAccess(repoId, userId);
 
-        return DocRepo.findByProjectId(projectId);
+        return DocRepo.findByRepoId(repoId);
     }
 
-    public Document createDocument(Long projectId, Long userId, String name, String language) {
+    public Document createDocument(Long repoId, Long userId, String name, String language) {
 
-        Project project = ProRepo.findById(projectId)
-                .orElseThrow(() -> new ResourceNotFoundException("Project not found"));
+        Repo repo = ProRepo.findById(repoId)
+                .orElseThrow(() -> new ResourceNotFoundException("Repo not found"));
 
-        if (!project.getOwner().getId().equals(userId)) {
-            throw new ForbiddenException("Only the project owner can create documents");
+        if (!repo.getOwner().getId().equals(userId)) {
+            throw new ForbiddenException("Only the repo owner can create documents");
         }
 
         Document doc = new Document();
         doc.setContent("");
         doc.setName(name);
-        doc.setProject(project);
+        doc.setRepo(repo);
         doc.setCreatedAt(LocalDateTime.now());
         doc.setLanguage(language);
         return DocRepo.save(doc);
     }
 
-    public Document updateDocument(Long projectId,
+    public Document updateDocument(Long repoId,
                                    Long documentId,
                                    Long userId,
                                    String content) {
 
-        getProjectWithAccess(projectId, userId);
+        getRepoWithAccess(repoId, userId);
 
         Document document = DocRepo.findById(documentId)
                 .orElseThrow(() -> new ResourceNotFoundException("Document not found"));
 
-        if (!document.getProject().getId().equals(projectId)) {
-            throw new ForbiddenException("Document does not belong to this project");
+        if (!document.getRepo().getId().equals(repoId)) {
+            throw new ForbiddenException("Document does not belong to this repo");
         }
 
         if (!document.getContent().equals(content)) {
@@ -115,58 +115,58 @@ public class DocumentService {
         return DocRepo.save(document);
     }
 
-    public void deleteDocument(Long projectId, Long documentId, Long userId) {
+    public void deleteDocument(Long repoId, Long documentId, Long userId) {
 
-        Project project = ProRepo.findById(projectId)
-                .orElseThrow(() -> new ResourceNotFoundException("Project not found"));
+        Repo repo = ProRepo.findById(repoId)
+                .orElseThrow(() -> new ResourceNotFoundException("Repo not found"));
 
-        if (!project.getOwner().getId().equals(userId)) {
+        if (!repo.getOwner().getId().equals(userId)) {
             throw new ForbiddenException("Only owner can delete documents");
         }
 
         Document document = DocRepo.findById(documentId)
                 .orElseThrow(() -> new ResourceNotFoundException("Document not found"));
 
-        if (!document.getProject().getId().equals(projectId)) {
-            throw new ForbiddenException("Document does not belong to this project");
+        if (!document.getRepo().getId().equals(repoId)) {
+            throw new ForbiddenException("Document does not belong to this repo");
         }
 
         DocRepo.delete(document);
     }
 
-    public List<DocumentVersion> getDocumentVersions(Long projectId,
+    public List<DocumentVersion> getDocumentVersions(Long repoId,
                                                      Long documentId,
                                                      Long userId) {
 
-        getProjectWithAccess(projectId, userId);
+        getRepoWithAccess(repoId, userId);
 
         Document document = DocRepo.findById(documentId)
                 .orElseThrow(() -> new ResourceNotFoundException("Document not found"));
 
-        if (!document.getProject().getId().equals(projectId)) {
-            throw new ForbiddenException("Document does not belong to this project");
+        if (!document.getRepo().getId().equals(repoId)) {
+            throw new ForbiddenException("Document does not belong to this repo");
         }
 
         return VerRepo.findByDocumentIdOrderByCreatedAtDesc(documentId);
     }
 
-    public Document restoreVersion(Long projectId,
+    public Document restoreVersion(Long repoId,
                                    Long documentId,
                                    Long versionId,
                                    Long userId) {
 
-        Project project = ProRepo.findById(projectId)
-                .orElseThrow(() -> new ResourceNotFoundException("Project not found"));
+        Repo repo = ProRepo.findById(repoId)
+                .orElseThrow(() -> new ResourceNotFoundException("Repo not found"));
 
-        if (!project.getOwner().getId().equals(userId)) {
+        if (!repo.getOwner().getId().equals(userId)) {
             throw new ForbiddenException("Only owner can restore versions");
         }
 
         Document document = DocRepo.findById(documentId)
                 .orElseThrow(() -> new ResourceNotFoundException("Document not found"));
 
-        if (!document.getProject().getId().equals(projectId)) {
-            throw new ForbiddenException("Document does not belong to this project");
+        if (!document.getRepo().getId().equals(repoId)) {
+            throw new ForbiddenException("Document does not belong to this repo");
         }
 
         DocumentVersion version = VerRepo.findById(versionId)
@@ -192,15 +192,15 @@ public class DocumentService {
         return DocRepo.save(document);
     }
 
-    public Document getDocument(Long projectId, Long documentId, Long userId) {
+    public Document getDocument(Long repoId, Long documentId, Long userId) {
 
-        getProjectWithAccess(projectId, userId);
+        getRepoWithAccess(repoId, userId);
 
         Document document = DocRepo.findById(documentId)
                 .orElseThrow(() -> new ResourceNotFoundException("Document not found"));
 
-        if (!document.getProject().getId().equals(projectId)) {
-            throw new ForbiddenException("Document does not belong to this project");
+        if (!document.getRepo().getId().equals(repoId)) {
+            throw new ForbiddenException("Document does not belong to this repo");
         }
 
         return document;

@@ -9,8 +9,8 @@ import lombok.Setter;
 @Setter
 public class InvitationResponse {
     private Long invitationId;
-    private Long projectId;
-    private String projectName;
+    private Long repoId;
+    private String repoName;
     private String invitedBy;
 
 }

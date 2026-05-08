@@ -21,8 +21,9 @@ public class Document {
     private String content;
 
     @ManyToOne(optional = false)
-    @JoinColumn(name = "project_id", nullable = false)
-    private Project project;
+    @JoinColumn(name = "repo_id", nullable = false)
+    private Repo repo;
+
 
     private String language;
 

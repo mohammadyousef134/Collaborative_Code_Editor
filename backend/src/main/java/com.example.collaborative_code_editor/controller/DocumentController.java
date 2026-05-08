@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/projects/{projectId}/documents")
+@RequestMapping("/repo/{repoId}/documents")
 public class DocumentController {
     private final DocumentService service;
 
@@ -30,55 +30,55 @@ public class DocumentController {
     }
 
     @GetMapping
-    public List<Document> getDocuments(@PathVariable Long projectId) {
+    public List<Document> getDocuments(@PathVariable Long repoId) {
         Long userId = getUserId();
-        return service.getDocuments(projectId, userId);
+        return service.getDocuments(repoId, userId);
     }
 
     @PostMapping
-    public Document createNewDocument(@PathVariable Long projectId, @RequestBody CreateDocumentRequest request) {
+    public Document createNewDocument(@PathVariable Long repoId, @RequestBody CreateDocumentRequest request) {
         Long userId = getUserId();
-        return service.createDocument(projectId, userId, request.getName(), request.getLanguage());
+        return service.createDocument(repoId, userId, request.getName(), request.getLanguage());
     }
 
     @PutMapping("/{documentId}")
-    public Document updateDocument(@PathVariable Long projectId, @PathVariable Long documentId, @RequestBody UpdateDocumentRequest request) {
+    public Document updateDocument(@PathVariable Long repoId, @PathVariable Long documentId, @RequestBody UpdateDocumentRequest request) {
         Long userId = getUserId();
-        return service.updateDocument(projectId, documentId, userId, request.getContent());
+        return service.updateDocument(repoId, documentId, userId, request.getContent());
     }
 
     @DeleteMapping("/{documentId}")
-    public void deleteDocument(@PathVariable Long projectId, @PathVariable Long documentId) {
+    public void deleteDocument(@PathVariable Long repoId, @PathVariable Long documentId) {
         Long userId = getUserId();
 
-        service.deleteDocument(projectId, documentId, userId);
+        service.deleteDocument(repoId, documentId, userId);
     }
 
     @GetMapping("/{documentId}/versions")
-    public List<DocumentVersion> getDocumentVersions(@PathVariable Long projectId
+    public List<DocumentVersion> getDocumentVersions(@PathVariable Long repoId
             , @PathVariable Long documentId) {
         Long userId = getUserId();
-        return service.getDocumentVersions(projectId, documentId, userId);
+        return service.getDocumentVersions(repoId, documentId, userId);
     }
 
     @PostMapping("/{documentId}/versions/{versionId}/restore")
     public Document restoreVersion(
-            @PathVariable Long projectId,
+            @PathVariable Long repoId,
             @PathVariable Long documentId,
             @PathVariable Long versionId
     ) {
         Long userId = getUserId();
 
-        return service.restoreVersion(projectId, documentId, versionId, userId);
+        return service.restoreVersion(repoId, documentId, versionId, userId);
     }
 
     @GetMapping("/{documentId}")
     public Document getDocument(
-            @PathVariable Long projectId,
+            @PathVariable Long repoId,
             @PathVariable Long documentId
     ) {
         Long userId = getUserId();
-        return service.getDocument(projectId, documentId, userId);
+        return service.getDocument(repoId, documentId, userId);
     }
 
 }

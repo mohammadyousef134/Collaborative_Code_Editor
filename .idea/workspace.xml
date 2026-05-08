@@ -4,14 +4,27 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b4606a95-179c-499a-883d-a0809ffcacb2" name="Changes" comment="fix document autosave">
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com.example.collaborative_code_editor/DTO/CreateDocumentRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com.example.collaborative_code_editor/DTO/CreateDocumentRequest.java" afterDir="false" />
+    <list default="true" id="b4606a95-179c-499a-883d-a0809ffcacb2" name="Changes" comment="add language support for documents">
+      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com.example.collaborative_code_editor/repository/ReopRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/backend/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com.example.collaborative_code_editor/DTO/CreateProjectRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com.example.collaborative_code_editor/DTO/CreateRepoRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com.example.collaborative_code_editor/DTO/InvitationResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com.example.collaborative_code_editor/DTO/InvitationResponse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com.example.collaborative_code_editor/DTO/InviteUserToProjectRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com.example.collaborative_code_editor/DTO/InviteUserToRepoRequest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/src/main/java/com.example.collaborative_code_editor/controller/DocumentController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com.example.collaborative_code_editor/controller/DocumentController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com.example.collaborative_code_editor/controller/InvitationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com.example.collaborative_code_editor/controller/InvitationController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com.example.collaborative_code_editor/controller/ProjectController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com.example.collaborative_code_editor/controller/RepoController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/src/main/java/com.example.collaborative_code_editor/entity/Document.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com.example.collaborative_code_editor/entity/Document.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com.example.collaborative_code_editor/entity/Project.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com.example.collaborative_code_editor/entity/Repo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com.example.collaborative_code_editor/entity/ProjectInvitation.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com.example.collaborative_code_editor/entity/RepoInvitation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com.example.collaborative_code_editor/entity/ProjectMember.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com.example.collaborative_code_editor/entity/RepoMember.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com.example.collaborative_code_editor/repository/DocumentRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com.example.collaborative_code_editor/repository/DocumentRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com.example.collaborative_code_editor/repository/ProjectInvitationRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com.example.collaborative_code_editor/repository/RepoInvitationRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com.example.collaborative_code_editor/repository/ProjectMemberRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com.example.collaborative_code_editor/repository/RepoMemberRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com.example.collaborative_code_editor/repository/ProjectRepository.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/src/main/java/com.example.collaborative_code_editor/service/DocumentService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com.example.collaborative_code_editor/service/DocumentService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/CodeEditor.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/CodeEditor.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/pages/DocumentEditor.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/DocumentEditor.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/pages/Documents.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/Documents.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com.example.collaborative_code_editor/service/ProjectService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com.example.collaborative_code_editor/service/RepoService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -152,7 +165,15 @@
       <option name="project" value="LOCAL" />
       <updated>1773918936951</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="add language support for documents">
+      <option name="closed" value="true" />
+      <created>1773922126448</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1773922126448</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -164,7 +185,8 @@
     <MESSAGE value=" Add Yjs CRDT" />
     <MESSAGE value="Refactoring" />
     <MESSAGE value="fix document autosave" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix document autosave" />
+    <MESSAGE value="add language support for documents" />
+    <option name="LAST_COMMIT_MESSAGE" value="add language support for documents" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
